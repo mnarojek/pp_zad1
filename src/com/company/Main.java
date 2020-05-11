@@ -14,6 +14,7 @@ public class Main {
         peopleStats = new PeopleStats(Paths.get("person.txt"));
 
         System.out.println(String.format("Liczba osób: %d", peopleStats.count()));
+        System.out.println(String.format("Liczba osób z unikalnymi nazwiskami: %d", peopleStats.countUniqueLastNames()));
     }
 }
 
@@ -31,6 +32,11 @@ class PeopleStats{
     public long count() {
         return people.size();
     }
+
+
+    public long countUniqueLastNames() {
+        return people.stream().map(Person::getLastName).distinct().count();
+    }
 }
 
 class Person{
@@ -46,6 +52,8 @@ class Person{
         return firstName;
     }
 
-
+    public String getLastName() {
+        return lastName;
+    }
 }
 
